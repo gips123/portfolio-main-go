@@ -1,0 +1,26 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - API_BASE_URL=${API_BASE_URL:-http://api:8080}
+        - NEXT_PUBLIC_API_BASE=${NEXT_PUBLIC_API_BASE:-http://localhost:8080}
+    container_name: best-portfolio
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+      # API_BASE_URL for server-side rendering (Docker internal network)
+      - API_BASE_URL=http://api:8080
+      # NEXT_PUBLIC_API_BASE for client-side (browser)
+      - NEXT_PUBLIC_API_BASE=${NEXT_PUBLIC_API_BASE:-http://localhost:8080}
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    external: true
+    name: best-portfolio-go_portfolio-network
+

@@ -1,0 +1,12 @@
+# Backup folder - tidak perlu di-deploy
+public_backup/
+
+# Development files
+.DS_Store
+*.log
+node_modules/
+
+# Git files
+.git/
+.gitignore
+
